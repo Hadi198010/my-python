@@ -11,3 +11,6 @@ replaced = re.sub(pattern, "09xxxxxxxxx", text)
 
 print("Modified text:", replaced)
 
+with open("output.txt", "w") as f:
+    f.write(replaced)
+
