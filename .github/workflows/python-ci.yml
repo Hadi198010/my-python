@@ -26,5 +26,14 @@ jobs:
     - name: Run script tests
       run: |
         python -m unittest discover -s . -p "test_T1.py"
+    - name: Upload release asset
+      if: github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v2
+      with:
+        name: Release ${{ github.run_number }}
+        tag_name: v${{ github.run_number }}
+        files: output.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
