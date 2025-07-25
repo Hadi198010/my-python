@@ -3,6 +3,7 @@ name: Python CI
 on:
   push:
     branches: [ "main" ]
+    tags: [ "v*" ]
   pull_request:
     branches: [ "main" ]
 permissions:
@@ -36,6 +37,12 @@ jobs:
       with:
         name: Release ${{ github.run_number }}
         tag_name: v${{ github.run_number }}
+        files: output.txt
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload to GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
         files: output.txt
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
